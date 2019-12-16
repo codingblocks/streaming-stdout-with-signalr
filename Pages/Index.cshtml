@@ -1,0 +1,31 @@
+﻿@page
+
+<div class="text-center">
+    <input name="command" id="commandText">
+    <input type="submit" id="executeButton" name="Execute">
+    <div id="output"></div>
+</div>
+
+<script src="~/@@microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/stream").build();
+    function stream(command) {
+        connection
+            .start()
+            .then(() => {
+                connection.on("OutputRecieved", message => {
+                    var p = document.createElement("p");
+                    p.textContent = message;
+                    document.getElementById("output").appendChild(p);
+                });
+                connection.invoke("Stream", command);
+            }).catch(err => alert(`An error occured: ${err}`));
+    }
+    
+    document.getElementById("executeButton").addEventListener("click", function (event) {
+
+    var command = document.getElementById("commandText").value;
+    stream(command)
+    event.preventDefault();
+});
+</script>
