@@ -6,19 +6,19 @@
 
 <script src="~/@@microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script>
-document.getElementById("executeButton").addEventListener("click", () => {
-    var command = document.getElementById("commandText").value;
-    var connection = new signalR.HubConnectionBuilder().withUrl("/stream").build();
-    var outputDiv = document.getElementById("output");
-    connection
-        .start()
-        .then(() => {
-            connection.on("OutputRecieved", message => {
-                var p = document.createElement("p");
-                p.textContent = message;
-                outputDiv.appendChild(p);
-            });
-            connection.invoke("Stream", command);
-        }).catch(err => alert(`An error occured: ${err}`));
-});
+    document.getElementById("executeButton").addEventListener("click", () => {
+        var command = document.getElementById("commandText").value;
+        var connection = new signalR.HubConnectionBuilder().withUrl("/stream").build();
+        var outputDiv = document.getElementById("output");
+        connection
+            .start()
+            .then(() => {
+                connection.on("OutputRecieved", message => {
+                    var p = document.createElement("p");
+                    p.textContent = message;
+                    outputDiv.appendChild(p);
+                });
+                connection.invoke("Stream", command);
+            }).catch(err => alert(`An error occured: ${err}`));
+    });
 </script>
