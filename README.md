@@ -4,4 +4,4 @@ This is a simple proof of concept showing how you can execute arbitrary commands
 
 This is a terrible idea, except when it's not, so use this example carefully!
 
-Read more about it here: https://www.codingblocks.net/programming/streaming-process-output-to-a-browser,-with-signalr-and-c#/
+Read more about it here: https://www.codingblocks.net/programming/streaming-cmd-output-with-signalr/
